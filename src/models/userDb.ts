@@ -21,3 +21,8 @@ export const findUserByEmail = async (email: any) => {
 export const findUserById = async (userId: string) => {
     return await usersCollection.findOne({ _id: new ObjectId(userId) });
 };
+
+
+export const getUsers = async () => {
+    return await usersCollection.find().toArray();
+}
