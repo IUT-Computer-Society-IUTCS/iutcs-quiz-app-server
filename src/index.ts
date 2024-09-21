@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import { connectDB } from './config/db';
 import { saveUser } from './controllers/authController';
+import { saveQuiz } from './controllers/quizController';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ connectDB()
 .catch(console.dir);
 
 app.post("/save-user", saveUser);
+app.post("/add-quiz", saveQuiz);
 
 app.get('/', (req, res) => {
     res.json({message: "Iut quiz server is running"});

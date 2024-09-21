@@ -1,8 +1,6 @@
-import bcrypt from "bcrypt";
-import { createUser, findUserById,findUserByEmail  } from "../models/userDb";
+import { createUser, findUserByEmail  } from "../models/userDb";
 import { Request, Response } from "express";
 import dotenv from "dotenv";
-import { generateToken } from "../utils/jwtUtils";
 
 dotenv.config();
 
