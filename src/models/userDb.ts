@@ -10,6 +10,7 @@ export const createUser = async (username: string, studentId: number, email: str
         studentId,
         email,
         role: (email == 'admin@gmail.com') ? 'admin' : 'student',
+        isBanned: false
     }
     return await usersCollection.insertOne(user);
 };

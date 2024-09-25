@@ -7,6 +7,6 @@ export const createQuiz = async(quiz:object) => {
 }
 
 export const getQuizzes = async () => {
-    return await quizCollection.find().toArray();
+    return await quizCollection.find().sort({quizDateTime: -1}).toArray();
 }
 
