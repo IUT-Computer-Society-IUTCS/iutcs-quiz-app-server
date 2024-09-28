@@ -6,7 +6,7 @@ interface ExtendedSocket extends Socket {
 }
 
 const handleConnection = (socket: ExtendedSocket) => {
-  console.log('Handling new connection:', socket.id);
+  // console.log('Handling new connection:', socket.id);
 
   const sendServerTime = () => {
     const currentTime = new Date().toISOString();
@@ -21,9 +21,9 @@ const handleConnection = (socket: ExtendedSocket) => {
 const handleDisconnection = (socket: ExtendedSocket) => {
   if (socket.intervalId) {
     clearInterval(socket.intervalId);
-    console.log('Interval cleared for socket:', socket.id);
+    // console.log('Interval cleared for socket:', socket.id);
   }
-  console.log('User disconnected:', socket.id);
+  // console.log('User disconnected:', socket.id);
 };
 
 export default {

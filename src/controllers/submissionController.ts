@@ -18,7 +18,7 @@ export const quizSubmission = async(req: Request, res: Response) => {
         }
     })
 
-    console.log(marks);
+    // console.log(marks);
 
     const result = await submissionCollection.insertOne({userName, userEmail, quizId, marks, submissionTime});
     res.send(result);
