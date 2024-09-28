@@ -9,6 +9,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import socketManager from './sockets/socketManager';
 import { quizSubmission } from './controllers/submissionController';
+import { fetchLeaderBoard } from './controllers/leaderBoardController';
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.post('/quiz/submission', quizSubmission);
 
 app.get('/all-users', fetchUsers);
 app.get('/all-quizzes', fetchQuizzes);
+app.get('/quiz/:id/leaderboard', fetchLeaderBoard)
 
 app.get('/', (req, res) => {
     res.json({message: "Iut quiz server is running"});
