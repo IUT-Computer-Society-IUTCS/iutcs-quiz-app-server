@@ -5,6 +5,10 @@ import { connectDB } from './config/db';
 import { saveUser } from './controllers/authController';
 import { fetchQuizzes, saveQuiz } from './controllers/quizController';
 import { fetchUsers } from './controllers/userController';
+import http from 'http';
+import { Server } from 'socket.io';
+import socketManager from './sockets/socketManager';
+import { quizSubmission } from './controllers/submissionController';
 
 dotenv.config();
 
@@ -20,12 +24,23 @@ app.use(cors({
 }))
 app.use(express.json());
 
+//init socket
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors:{
+        origin: '*'
+    }
+})
+
+socketManager(io);
+
 
 connectDB()
 .catch(console.dir);
 
 app.post("/save-user", saveUser);
 app.post("/add-quiz", saveQuiz);
+app.post('/quiz/submission', quizSubmission);
 
 
 app.get('/all-users', fetchUsers);
@@ -34,6 +49,6 @@ app.get('/all-quizzes', fetchQuizzes);
 app.get('/', (req, res) => {
     res.json({message: "Iut quiz server is running"});
 })
-app.listen(port, ()=> {
+server.listen(port, ()=> {
     console.log(`Server is running on port = ${port}`);
 })
