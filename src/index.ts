@@ -43,7 +43,7 @@ connectDB()
 app.post("/save-user", saveUser);
 app.post("/add-quiz", saveQuiz);
 app.post('/quiz/submission', quizSubmission);
-app.post('/update-mark', updateMarks);
+app.post('/update-marks', updateMarks);
 
 
 app.get('/all-users', fetchUsers);

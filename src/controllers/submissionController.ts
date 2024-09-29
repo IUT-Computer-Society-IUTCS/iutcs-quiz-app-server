@@ -5,12 +5,12 @@ const submissionCollection = database.collection('submissions');
 
 export const quizSubmission = async(req: Request, res: Response) => {
     const data = req.body;
-    const {userName, userEmail, quizId, submissionTime, marks} = data;
+    const {userName, userEmail, quizId, submissionTime} = data;
 
     const isExist = await submissionCollection.findOne({userEmail, quizId});
-    if(isExist) return console.log('already exist data');
+    if(isExist) return;
 
-    const result = await submissionCollection.insertOne({userName, userEmail, quizId, marks, submissionTime});
+    const result = await submissionCollection.insertOne({userName, userEmail, quizId, marks: 0, submissionTime});
     res.send(result);
     
 }
