@@ -10,6 +10,7 @@ import { Server } from 'socket.io';
 import socketManager from './sockets/socketManager';
 import { quizSubmission } from './controllers/submissionController';
 import { fetchLeaderBoard } from './controllers/leaderBoardController';
+import { updateMarks } from './controllers/updateMarksController';
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ connectDB()
 app.post("/save-user", saveUser);
 app.post("/add-quiz", saveQuiz);
 app.post('/quiz/submission', quizSubmission);
+app.post('/update-mark', updateMarks);
 
 
 app.get('/all-users', fetchUsers);

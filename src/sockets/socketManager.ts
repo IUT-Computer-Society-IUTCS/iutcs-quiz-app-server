@@ -13,6 +13,20 @@ const socketManager = (io: Server) => {
       socket.emit('currentTime', currentTime); 
     });
 
+    let countDownTime = 60 * 5;
+
+    socket.emit('timer', countDownTime);
+
+    const intervalId = setInterval(() => {
+      if (countDownTime > 0) {
+        countDownTime--;
+        io.emit('timer', countDownTime);
+      } else {
+        clearInterval(intervalId);
+        io.emit('timer', 0); // Send 0 when the countdown ends
+      }
+    }, 1000);
+
     socket.on('disconnect', () => {
       socketController.handleDisconnection(socket);
     });

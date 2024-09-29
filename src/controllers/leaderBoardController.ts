@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { database } from "../config/db";
-import { ObjectId } from "mongodb";
 
 const submissionCollection = database.collection("submissions");
 
