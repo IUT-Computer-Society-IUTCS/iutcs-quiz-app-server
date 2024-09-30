@@ -11,6 +11,7 @@ import socketManager from './sockets/socketManager';
 import { quizSubmission } from './controllers/submissionController';
 import { fetchLeaderBoard } from './controllers/leaderBoardController';
 import { updateMarks } from './controllers/updateMarksController';
+import { deleteQuiz } from './controllers/quizDeleteController';
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.post("/save-user", saveUser);
 app.post("/add-quiz", saveQuiz);
 app.post('/quiz/submission', quizSubmission);
 app.post('/update-marks', updateMarks);
+app.post('/delete-quiz', deleteQuiz);
 
 
 app.get('/all-users', fetchUsers);
