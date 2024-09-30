@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import { connectDB } from './config/db';
 import { saveUser } from './controllers/authController';
-import { fetchQuizzes, fetchSingleQuiz, saveQuiz } from './controllers/quizController';
+import { fetchQuizzes, fetchSingleQuiz, saveQuiz, updateQuiz } from './controllers/quizController';
 import { fetchUsers } from './controllers/userController';
 import http from 'http';
 import { Server } from 'socket.io';
@@ -22,12 +22,12 @@ const app = express();
 //middlewares
 app.use(cors({
     origin: process.env.ORIGIN,
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE'],
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PATCH'],
     credentials: true,
 }))
 app.use(express.json());
 
-//init socket
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors:{
@@ -52,6 +52,9 @@ app.get('/all-users', fetchUsers);
 app.get('/all-quizzes', fetchQuizzes);
 app.get('/quiz/:id/leaderboard', fetchLeaderBoard);
 app.get('/single-quiz/:id', fetchSingleQuiz);
+
+
+app.patch('/update-quiz', updateQuiz);
 
 app.get('/', (req, res) => {
     res.json({message: "Iut quiz server is running"});

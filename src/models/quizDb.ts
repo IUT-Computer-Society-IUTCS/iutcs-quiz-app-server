@@ -15,3 +15,8 @@ export const getSingleQuiz = async(id: string) => {
     return await quizCollection.findOne({_id: new ObjectId(id)});
 }
 
+
+export const updateQuizData = async(filter:object, updateDoc:object, options:object) =>{
+    return await quizCollection.updateOne(filter, updateDoc, options);
+}
+
