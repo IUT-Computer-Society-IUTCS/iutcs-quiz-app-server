@@ -12,7 +12,6 @@ const quizController_1 = require("./controllers/quizController");
 const userController_1 = require("./controllers/userController");
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
-const socketManager_1 = __importDefault(require("./sockets/socketManager"));
 const submissionController_1 = require("./controllers/submissionController");
 const leaderBoardController_1 = require("./controllers/leaderBoardController");
 const updateMarksController_1 = require("./controllers/updateMarksController");
@@ -23,7 +22,7 @@ const port = process.env.PORT || 3456;
 const app = (0, express_1.default)();
 //middlewares
 app.use((0, cors_1.default)({
-    origin: process.env.ORIGIN,
+    origin: [process.env.ORIGIN, "http://103.82.172.192:3200"],
     methods: ["GET", "POST", "DELETE", "UPDATE", "PATCH"],
     credentials: true,
 }));
@@ -35,7 +34,6 @@ const io = new socket_io_1.Server(server, {
         origin: "*",
     },
 });
-(0, socketManager_1.default)(io);
 (0, db_1.connectDB)().catch(console.dir);
 app.post("/save-user", authController_1.saveUser);
 app.post("/add-quiz", quizController_1.saveQuiz);

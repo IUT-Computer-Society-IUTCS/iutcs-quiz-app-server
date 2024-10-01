@@ -12,7 +12,6 @@ import {
 import { fetchUsers } from "./controllers/userController";
 import http from "http";
 import { Server } from "socket.io";
-import socketManager from "./sockets/socketManager";
 import { quizSubmission } from "./controllers/submissionController";
 import { fetchLeaderBoard } from "./controllers/leaderBoardController";
 import { updateMarks } from "./controllers/updateMarksController";
@@ -27,7 +26,7 @@ const app = express();
 //middlewares
 app.use(
     cors({
-        origin: process.env.ORIGIN,
+        origin: [process.env.ORIGIN as string, "http://103.82.172.192:3200"],
         methods: ["GET", "POST", "DELETE", "UPDATE", "PATCH"],
         credentials: true,
     })
@@ -41,8 +40,6 @@ const io = new Server(server, {
         origin: "*",
     },
 });
-
-socketManager(io);
 
 connectDB().catch(console.dir);
 
